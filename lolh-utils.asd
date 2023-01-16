@@ -4,4 +4,5 @@
   :author "LOLH <lincolnlaw@mac.com"
   :license "mine"
   :depends-on ()
-  :components ((:file "./cl-bst/cl-bst")))
+  :components ((:file "lolh-utils-packages")
+	       (:file "./cl-bst/cl-bst" :depends-on ("lolh-utils-packages"))))

@@ -1,5 +1,5 @@
 ;;; cl-bst.lisp - Binary Search Tree procedures in Common Lisp
-;;; Time-stamp: <2023-01-16 01:46:47 minilolh3>
+;;; Time-stamp: <2023-01-16 15:44:08 minilolh3>
 
 ;;; Author: LOLH
 ;;; Created: 2023-01-14
@@ -8,27 +8,6 @@
 ;;; Commentary
 
 ;;; Code:
-
-(defpackage :lolh.utils
-  (:use :cl)
-  (:export :*cl-bst*
-	   :*cl-bst-eqs*
-	   :*cl-bst-lt*
-	   :*cl-bst-gt*
-	   :*cl-bst-eq*
-	   :make-bst-node
-	   :cl-bst-set-cmp-funcs
-	   :bst-insert!-node
-	   :bst-delete!node
-	   :bst-delete-node
-	   :bst-inorder-traversal
-	   :bst-preorder-traversal
-	   :bst-postorder-traversal
-	   :bst-find-node
-	   :bst-min
-	   :bst-max
-	   :bst-size
-	   :bst-height))
 
 (in-package :lolh.utils)
 

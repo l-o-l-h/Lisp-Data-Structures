@@ -4,4 +4,4 @@
   :author "LOLH <lincolnlaw@mac.com"
   :license "mine"
   :depends-on ()
-  :components ((:file "~/Dev/Utilities/Lisp-Data-Structures/cl-bst/cl-bst")))
+  :components ((:file "./cl-bst/cl-bst")))

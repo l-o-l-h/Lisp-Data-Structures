@@ -1,5 +1,5 @@
 ;;; lolh-utils-packages.lisp - Packages used by lolh-utils
-;;; Time-stamp: <2023-01-16 15:42:04 minilolh3>
+;;; Time-stamp: <2023-01-21 17:41:07 wlh>
 
 ;;; Author: LOLH <lincolnlaw@mac.com>
 ;;; Created: 2023-01-16
@@ -17,6 +17,10 @@
 	   :*cl-bst-gt*
 	   :*cl-bst-eq*
 	   :make-bst-node
+	   :empty-bst-node
+           :bst-node-left
+	   :bst-node-data
+	   :bst-node-right
 	   :cl-bst-set-cmp-funcs
 	   :bst-insert!-node
 	   :bst-delete!node

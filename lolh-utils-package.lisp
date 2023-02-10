@@ -1,5 +1,5 @@
 ;;; lolh-utils-packages.lisp - Packages used by lolh-utils
-;;; Time-stamp: <2023-02-09 07:03:25 minilolh3>
+;;; Time-stamp: <2023-02-10 08:51:19 minilolh3>
 
 ;;; Author: LOLH <lincolnlaw@mac.com>
 ;;; Created: 2023-01-16
@@ -11,7 +11,9 @@
 
 (defpackage :lolh.utils
   (:use :cl)
-  (:export :*cl-bst*
+  (:export
+;; BS-TREE
+	   :*cl-bst*
 	   :*cl-bst-eqs*
 	   :*cl-bst-lt*
 	   :*cl-bst-gt*
@@ -32,7 +34,11 @@
 	   :bst-min
 	   :bst-max
 	   :bst-size
-	   :bst-height))
+	   :bst-height
+;; RB-TREE
+	   :rb-elem
+	   :rb-make
+	   :+empty-rb-tree+))
 
 
 ;;; End lolh-utils-packages.lisp

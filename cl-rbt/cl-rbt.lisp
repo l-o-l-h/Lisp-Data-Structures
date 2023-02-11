@@ -1,5 +1,5 @@
 ;;; cl-rbt.lisp -- RED-BLACK TREES
-;;; Time-stamp: <2023-02-11 03:00:15 wlh>
+;;; Time-stamp: <2023-02-11 03:07:41 wlh>
 
 ;;; Author: LOLH-LINC <lincolnlaw@mac.com>
 ;;; Created: 2023-02-09
@@ -34,8 +34,8 @@ This should be subclassed by the package that uses this RBT package."))
 (defstruct rb-color
   "A structure containing one slot, R-B, which should be either
 :red or :black.  Use the RB-MAKE constructor to construct an instance
-to enforce this constraint.
-"
+to enforce this constraint."
+  
   (r-b :black)) ; :red | :black
 
 (defstruct rb-tree
@@ -45,8 +45,8 @@ to enforce this constraint.
 :elem  -- holds an instance of the RB-ELEM object
 :right -- holds an instance of this RB-TREE object.
 Use the RB-MAKE function to create an instance to enforce these
-constraints.
-"
+constraints."
+  
   (color (make-rb-color))
   left
   (elem (make-instance 'rb-elem))
@@ -74,8 +74,8 @@ Examples:
 An ERROR will be raised if something other than an RB-COLOR or RB-TREE
 is attempted to be constructed.
 An ERROR will be raised if something other than an RB-ELEM is used as
-a value.
-"
+a value."
+  
   (ecase rb-type
     (rb-color (ecase value
 		(:red (make-rb-color :r-b :red))
@@ -111,9 +111,11 @@ a value.
 (defun rbt-member (x tree)
   "The RBT-MEMBER procedure returns T if X (an ELEM) is found in TREE."
   (cond
-    ((tree-empty-p tree) nil)
-    ((when (rb-lt x (rb-tree-elem tree)) (rbt-member x (rb-tree-left tree))))
-    ((when (rb-gt x (rb-tree-elem tree)) (rbt-member x (rb-tree-right tree))))
+    ((rb-empty-tree-p tree) nil)
+    ((when (rb-lt x (rb-tree-elem tree))
+       (rbt-member x (rb-tree-left tree))))
+    ((when (rb-gt x (rb-tree-elem tree))
+       (rbt-member x (rb-tree-right tree))))
     (t)))
 
 ;;; Insert

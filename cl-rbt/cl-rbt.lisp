@@ -1,29 +1,35 @@
 ;;; cl-rbt.lisp -- RED-BLACK TREES
-;;; Time-stamp: <2023-02-10 09:02:58 minilolh3>
+;;; Time-stamp: <2023-02-11 03:00:15 wlh>
 
 ;;; Author: LOLH-LINC <lincolnlaw@mac.com>
 ;;; Created: 2023-02-09
-;;; Version 0.0.1
+;;; Version 0.0.2
 
 ;;; Commentary:
-;; My version of Red-Black Trees based upon Chris Okasaki's "Purely Functional Data Structures" 1998
+;; My version of Red-Black Trees based upon Chris Okasaki's
+"Purely Functional Data Structures" 1998
 
 ;;; Code:
 (in-package :lolh.utils)
 
 ;;; Invariants
-;;  Invariant 1: No red node has a red child
-;;  Invariant 2: Every path from the root to an empty node contains the same number of black nodes
-;;  Taken together, these two invariants guarantee that the longest possible path in a red-black tree,
-;;  one with alternating black and red nodes, is no longer than twice as long as the shortest possible
-;;  path, one with black nodes only.
-;;  Exercise: Prove that the maximinum depth of a node in a red-black tree of size 'n' is at most
-;;  2 [ log ( n + 1 ) ]
+;;  Invariant 1: No  red node has a red child  Invariant 2: Every path
+;;  from the root  to an empty node contains the  same number of black
+;;  nodes  Taken together,  these  two invariants  guarantee that  the
+;;  longest possible  path in a  red-black tree, one  with alternating
+;;  black  and red  nodes, is  no  longer than  twice as  long as  the
+;;  shortest  possible path,  one  with black  nodes only.   Exercise:
+;;  Prove that  the maximinum depth of  a node in a  red-black tree of
+;;  size 'n' is at most 2 [ log ( n + 1 ) ]
 
 (defclass rb-elem ()
   ((value :accessor value :initarg :value :initform :empty))
   (:documentation "Base class for an RB-TREE ELEM value.
 This should be subclassed by the package that uses this RBT package."))
+
+(defun make-rb-elem (&key (class 'rb-elem) (value (make-instance 'rb-elem)))
+  "Constructor for the RB-ELEM class instance or subclass."
+  (make-instance class :value value))
 
 (defstruct rb-color
   "A structure containing one slot, R-B, which should be either
@@ -38,17 +44,22 @@ to enforce this constraint.
 :left  -- holds an instance of this RB-TREE object
 :elem  -- holds an instance of the RB-ELEM object
 :right -- holds an instance of this RB-TREE object.
-Use the RB-MAKE function to create an instance to enforce these constraints.
+Use the RB-MAKE function to create an instance to enforce these
+constraints.
 "
   (color (make-rb-color))
   left
   (elem (make-instance 'rb-elem))
   right)
 
-(defparameter +empty-rb-tree+
+(defparameter +rb-empty-tree+
   (make-rb-tree :left (make-rb-tree :elem :empty)
 		:elem :empty
 		:right (make-rb-tree :elem :empty)))
+
+(defun rb-empty-tree-p (rbt)
+  "Returns T if RBT is empty."
+  (eq +rb-empty-tree+ rbt))
 
 (defun rb-make (rb-type value &optional (color (make-rb-color)))
   "Constructor for the RB-COLOR and RB-TREE data types.
@@ -70,9 +81,9 @@ a value.
 		(:red (make-rb-color :r-b :red))
 		(:black (make-rb-color :r-b :black))))
     (rb-tree (etypecase value
-	       (rb-elem (make-rb-tree :left +empty-rb-tree+
+	       (rb-elem (make-rb-tree :left +rb-empty-tree+
 				      :elem value
-				      :right +empty-rb-tree+
+				      :right +rb-empty-tree+
 				      :color color))))))
 
 (defun rb-lt (tree-a tree-b)
@@ -93,8 +104,9 @@ a value.
 	(rb-tree-elem tree))))
 
 ;;; Member
-;;  The 'member' procedure on a red-black tree ignores the color field.  Except for a wildcard in the
-;;  T case, it is identical to the 'member' procedure on unbalanced search trees.
+;;  The  'member' procedure  on  a red-black  tree  ignores the  color
+;;  field.  Except  for a wildcard in  the T case, it  is identical to
+;;  the 'member' procedure on unbalanced search trees.
 
 (defun rbt-member (x tree)
   "The RBT-MEMBER procedure returns T if X (an ELEM) is found in TREE."

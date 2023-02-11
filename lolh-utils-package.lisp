@@ -1,9 +1,9 @@
 ;;; lolh-utils-packages.lisp - Packages used by lolh-utils
-;;; Time-stamp: <2023-02-10 08:51:19 minilolh3>
+;;; Time-stamp: <2023-02-11 03:00:41 wlh>
 
 ;;; Author: LOLH <lincolnlaw@mac.com>
 ;;; Created: 2023-01-16
-;;; Version 0.1.4
+;;; Version 0.1.5
 
 ;;; Commentary:
 
@@ -37,8 +37,11 @@
 	   :bst-height
 ;; RB-TREE
 	   :rb-elem
+	   :make-rb-elem
+	   :rb-color
+	   :rb-tree
 	   :rb-make
-	   :+empty-rb-tree+))
+	   :+rb-empty-tree+))
 
 
 ;;; End lolh-utils-packages.lisp

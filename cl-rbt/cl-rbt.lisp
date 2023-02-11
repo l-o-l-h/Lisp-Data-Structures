@@ -1,5 +1,5 @@
 ;;; cl-rbt.lisp -- RED-BLACK TREES
-;;; Time-stamp: <2023-02-11 03:07:41 wlh>
+;;; Time-stamp: <2023-02-11 09:50:26 wlh>
 
 ;;; Author: LOLH-LINC <lincolnlaw@mac.com>
 ;;; Created: 2023-02-09
@@ -86,42 +86,37 @@ a value."
 				      :right +rb-empty-tree+
 				      :color color))))))
 
-(defun rb-lt (tree-a tree-b)
+(defmethod rb-lt ((elem rb-elem) (tree rb-tree))
   "RBT less-than procedure."
-  (< (rb-tree-elem tree-a)
-     (rb-tree-elem tree-b)))
+  (< (value elem) (value (rb-tree-elem tree))))
 
-(defun rb-gt (tree-a tree-b)
+(defmethod rb-gt ((elem rb-elem) (tree rb-tree))
   "RBT greater-than procedure."
-  (> (rb-tree-elem tree-a)
-     (rb-tree-elem tree-b)))
-
-(defun tree-empty-p (tree)
-  "Return T if TREE is empty.  Ignore the COLOR field."
-  (not (or
-	(rb-tree-left tree)
-	(rb-tree-right tree)
-	(rb-tree-elem tree))))
+  (> (value elem) (value (rb-tree-elem tree))))
 
 ;;; Member
 ;;  The  'member' procedure  on  a red-black  tree  ignores the  color
 ;;  field.  Except  for a wildcard in  the T case, it  is identical to
 ;;  the 'member' procedure on unbalanced search trees.
 
-(defun rbt-member (x tree)
-  "The RBT-MEMBER procedure returns T if X (an ELEM) is found in TREE."
-  (cond
-    ((rb-empty-tree-p tree) nil)
-    ((when (rb-lt x (rb-tree-elem tree))
-       (rbt-member x (rb-tree-left tree))))
-    ((when (rb-gt x (rb-tree-elem tree))
-       (rbt-member x (rb-tree-right tree))))
-    (t)))
+(defun rb-member (x tree)
+  "RB-MEMBER returns T if the element X is found in the tree TREE.
+Otherwise it returns NIL."
+  (labels ((mem-aux (x tree)
+	     (cond
+	       ((when (rb-empty-tree-p tree)
+		  (return-from rb-member nil)))
+	       ((when (rb-lt x tree)
+		  (mem-aux x (rb-tree-left tree))))
+	       ((when (rb-gt x tree)
+		  (mem-aux x (rb-tree-right tree))))
+	       (t (return-from rb-member t)))))
+    (mem-aux x tree)))
 
 ;;; Insert
 ;;  The 'insert' function must maintain the two balance invariants.
 
-(defun rbt-insert (x s)
+(defun rb-insert (x s)
   (let ((y (rb-tree-elem s)))
     ()))
 

@@ -1,5 +1,5 @@
 ;;; cl-rbt.lisp -- RED-BLACK TREES
-;;; Time-stamp: <2023-02-11 09:50:26 wlh>
+;;; Time-stamp: <2023-02-12 22:05:32 wlh>
 
 ;;; Author: LOLH-LINC <lincolnlaw@mac.com>
 ;;; Created: 2023-02-09
@@ -27,7 +27,7 @@
   (:documentation "Base class for an RB-TREE ELEM value.
 This should be subclassed by the package that uses this RBT package."))
 
-(defun make-rb-elem (&key (class 'rb-elem) (value (make-instance 'rb-elem)))
+(defun make-rb-elem (&key (class 'rb-elem) (value 1))
   "Constructor for the RB-ELEM class instance or subclass."
   (make-instance class :value value))
 

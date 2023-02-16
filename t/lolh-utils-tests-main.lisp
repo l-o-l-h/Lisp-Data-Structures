@@ -1,5 +1,5 @@
 ;;; lolh-utils-tests-main.lisp --- Main Lolh.Utils Test File
-;;; Time-stamp: <2023-02-12 22:23:26 wlh>
+;;; Time-stamp: <2023-02-16 08:39:52 wlh>
 
 ;;; Author: LOLH-LINC <lincolnlaw@mac.com>
 ;;; Created: 2023-02-12
@@ -29,8 +29,8 @@
 (test rb-elem
   (is-true (make-instance 'rb-elem :value 1))
   (is-true (make-rb-elem :class 'rb-elem :value 1))
-  (is-true (rb-make 'rb-color :red))
-  (is-true (rb-make 'rb-tree (make-rb-elem :value 1) :red)))
+  (is-true (make-rb 'color :red))
+  (is-true (make-rb 'tree (make-rb-elem :value 1) :red)))
 
 ;;; lolh-utils-tests-main.lisp end of file
 ;;; __________________________________________________________________

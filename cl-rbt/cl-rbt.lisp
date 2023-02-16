@@ -1,5 +1,5 @@
 ;;; cl-rbt.lisp -- RED-BLACK TREES
-;;; Time-stamp: <2023-02-12 22:05:32 wlh>
+;;; Time-stamp: <2023-02-16 08:39:40 wlh>
 
 ;;; Author: LOLH-LINC <lincolnlaw@mac.com>
 ;;; Created: 2023-02-09
@@ -7,20 +7,24 @@
 
 ;;; Commentary:
 ;; My version of Red-Black Trees based upon Chris Okasaki's
-"Purely Functional Data Structures" 1998
+;; "Purely Functional Data Structures" 1998
 
 ;;; Code:
 (in-package :lolh.utils)
 
 ;;; Invariants
-;;  Invariant 1: No  red node has a red child  Invariant 2: Every path
-;;  from the root  to an empty node contains the  same number of black
-;;  nodes  Taken together,  these  two invariants  guarantee that  the
-;;  longest possible  path in a  red-black tree, one  with alternating
-;;  black  and red  nodes, is  no  longer than  twice as  long as  the
-;;  shortest  possible path,  one  with black  nodes only.   Exercise:
-;;  Prove that  the maximinum depth of  a node in a  red-black tree of
-;;  size 'n' is at most 2 [ log ( n + 1 ) ]
+;;  Invariant 1: No  red node has a red child
+
+;;  Invariant 2:  Every path from the  root to an empty  node contains
+;;  the  same  number  of  black   nodes.
+
+;;  Taken together,  these two  invariants guarantee that  the longest
+;;  possible path in a red-black  tree, one with alternating black and
+;;  red  nodes, is  no  longer  than twice  as  long  as the  shortest
+;;  possible path,  one with black  nodes only.
+
+;;  Exercise: Prove that the maximinum depth  of a node in a red-black
+;;  tree of size 'n' is at most 2 [ log ( n + 1 ) ]
 
 (defclass rb-elem ()
   ((value :accessor value :initarg :value :initform :empty))
@@ -33,7 +37,7 @@ This should be subclassed by the package that uses this RBT package."))
 
 (defstruct rb-color
   "A structure containing one slot, R-B, which should be either
-:red or :black.  Use the RB-MAKE constructor to construct an instance
+:red or :black.  Use the MAKE-RB constructor to construct an instance
 to enforce this constraint."
   
   (r-b :black)) ; :red | :black
@@ -44,7 +48,7 @@ to enforce this constraint."
 :left  -- holds an instance of this RB-TREE object
 :elem  -- holds an instance of the RB-ELEM object
 :right -- holds an instance of this RB-TREE object.
-Use the RB-MAKE function to create an instance to enforce these
+Use the MAKE-RB function to create an instance to enforce these
 constraints."
   
   (color (make-rb-color))
@@ -61,15 +65,15 @@ constraints."
   "Returns T if RBT is empty."
   (eq +rb-empty-tree+ rbt))
 
-(defun rb-make (rb-type value &optional (color (make-rb-color)))
+(defun make-rb (rb-type value &optional (color (make-rb-color)))
   "Constructor for the RB-COLOR and RB-TREE data types.
-RB-TYPE := 'rb-color | 'rb-tree
+RB-TYPE := 'color | 'tree
 VALUEs of rb-color := :red | :black
 VALUEs of rb-tree := rb-elem &optional color
 
 Examples:
-(rb-make 'rb-color :red)
-(rb-make 'rb-tree (make-rb-elem :value [elem-value]))
+(make-rb 'color :red)
+(make-rb 'tree (make-rb-elem :value [elem-value]))
 
 An ERROR will be raised if something other than an RB-COLOR or RB-TREE
 is attempted to be constructed.
@@ -77,10 +81,10 @@ An ERROR will be raised if something other than an RB-ELEM is used as
 a value."
   
   (ecase rb-type
-    (rb-color (ecase value
+    (color (ecase value
 		(:red (make-rb-color :r-b :red))
 		(:black (make-rb-color :r-b :black))))
-    (rb-tree (etypecase value
+    (tree (etypecase value
 	       (rb-elem (make-rb-tree :left +rb-empty-tree+
 				      :elem value
 				      :right +rb-empty-tree+

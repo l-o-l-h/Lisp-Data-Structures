@@ -1,5 +1,5 @@
 ;;; cl-rbt.lisp -- RED-BLACK TREES
-;;; Time-stamp: <2023-02-16 08:39:40 wlh>
+;;; Time-stamp: <2023-02-18 12:44:07 lolh-mbp-16>
 
 ;;; Author: LOLH-LINC <lincolnlaw@mac.com>
 ;;; Created: 2023-02-09
@@ -40,7 +40,7 @@ This should be subclassed by the package that uses this RBT package."))
 :red or :black.  Use the MAKE-RB constructor to construct an instance
 to enforce this constraint."
   
-  (r-b :black)) ; :red | :black
+  (value :black)) ; :red | :black
 
 (defstruct rb-tree
   "A structure containing four slots,
@@ -82,8 +82,8 @@ a value."
   
   (ecase rb-type
     (color (ecase value
-		(:red (make-rb-color :r-b :red))
-		(:black (make-rb-color :r-b :black))))
+		(:red (make-rb-color :value :red))
+		(:black (make-rb-color :value :black))))
     (tree (etypecase value
 	       (rb-elem (make-rb-tree :left +rb-empty-tree+
 				      :elem value

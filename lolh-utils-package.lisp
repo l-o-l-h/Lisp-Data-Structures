@@ -1,9 +1,9 @@
 ;;; lolh-utils-packages.lisp - Packages used by lolh-utils
-;;; Time-stamp: <2023-02-18 12:47:58 lolh-mbp-16>
+;;; Time-stamp: <2023-02-22 00:36:01 lolh-mbp-16>
 
 ;;; Author: LOLH <lincolnlaw@mac.com>
 ;;; Created: 2023-01-16
-;;; Version 0.1.5
+;;; Version 0.1.6
 
 ;;; Commentary:
 
@@ -38,11 +38,21 @@
 ;; RB-TREE
 	   :rb-elem
 	   :value
+	   :rb-elem-value
 	   :make-rb-elem
 	   :make-rb-color
 	   :make-rb-tree
 	   :rb-color-value
+	   :rb-tree-elem
+	   :rb-tree-elem-value
+	   :rb-tree-left
+	   :rb-tree-right
+	   :rb-tree-color
+	   :rb-tree-values
 	   :color
+	   :+rb-red+
+	   :+rb-black+
+	   :rb-black-p
 	   :tree
 	   :make-rb
 	   :+rb-empty-tree+))

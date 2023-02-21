@@ -1,12 +1,12 @@
 ;;; cl-rbt-definitions.lisp
-;;; Time-stamp: <2023-02-11 03:00:54 wlh>
+;;; Time-stamp: <2023-02-20 00:58:12 lolh-mbp-16>
 
 ;;; Author: LOLH-LINC <lincolnlaw@mac.com>
 ;;; Created: 2023-02-10
 ;;; Version: 0.0.2
 
 ;;; Commentary:
-;;  Definitions fromr the cl-rbt.lisp objects
+;;  Definitions from the cl-rbt.lisp objects
 
 ;;; Code:
 

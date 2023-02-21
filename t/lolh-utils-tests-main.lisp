@@ -1,9 +1,9 @@
 ;;; lolh-utils-tests-main.lisp --- Main Lolh.Utils Test File
-;;; Time-stamp: <2023-02-18 12:47:06 lolh-mbp-16>
+;;; Time-stamp: <2023-02-22 00:36:14 lolh-mbp-16>
 
 ;;; Author: LOLH-LINC <lincolnlaw@mac.com>
 ;;; Created: 2023-02-12
-;;; Version: 0.0.1
+;;; Version: 0.0.2
 ;;; License
 
 ;;; Commentary:
@@ -53,7 +53,27 @@
   (is (eql :red (rb-color-value rb-color-red))))
 
 (test rb-tree
-  (finishes (defparameter rb-tree-default (make-rb-tree))))
+  (finishes (defparameter rb-tree-default (make-rb-tree)))
+  (finishes (describe rb-tree-default))
+  (finishes (defparameter rb-tree-1 (make-rb-tree
+				     :color :red
+				     :left (make-rb-tree :color :black)
+				     :elem (make-rb-elem :value 2)
+				     :right (make-rb-tree :color :red))))
+  (finishes (describe rb-tree-1)))
+
+(test make-rb
+  (finishes (defparameter make-rb-color-def (make-rb 'color :black)))
+  (finishes (describe make-rb-color-def))
+  (signals type-error (defparameter make-rb-color-def2 (make-rb 'color :purple)))
+  (finishes (defparameter make-rb-tree-def (make-rb 'tree (make-rb-elem))))
+  (finishes (describe make-rb-tree-def))
+  (finishes (defparameter make-rb-tree-1 (make-rb 'tree (make-rb-elem :value 1) :red)))
+  (signals type-error (defparameter wrong-tree (make-rb 'shrub 1)))
+  (is (eql 1 (value (rb-tree-elem make-rb-tree-1))))
+  (is (eql 1 (rb-tree-elem-value make-rb-tree-1)))
+  (finishes (defparameter rb-tree-values (multiple-value-list (rb-tree-values make-rb-tree-1))))
+  (finishes (describe rb-tree-values)))
 
 ;;; lolh-utils-tests-main.lisp end of file
 ;;; __________________________________________________________________

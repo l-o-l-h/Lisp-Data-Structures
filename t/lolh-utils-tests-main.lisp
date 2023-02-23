@@ -1,5 +1,5 @@
 ;;; lolh-utils-tests-main.lisp --- Main Lolh.Utils Test File
-;;; Time-stamp: <2023-02-22 00:36:14 lolh-mbp-16>
+;;; Time-stamp: <2023-02-23 02:16:51 lolh-mbp-16>
 
 ;;; Author: LOLH-LINC <lincolnlaw@mac.com>
 ;;; Created: 2023-02-12
@@ -74,6 +74,23 @@
   (is (eql 1 (rb-tree-elem-value make-rb-tree-1)))
   (finishes (defparameter rb-tree-values (multiple-value-list (rb-tree-values make-rb-tree-1))))
   (finishes (describe rb-tree-values)))
+
+(def-suite test-rb-balance
+  :description "Tests for the balance procedure."
+  :in all-tests)
+
+(in-suite test-rb-balance)
+
+(test basic-rb-balance
+  (finishes (defparameter e1 (make-rb-elem :value 50)))
+  (finishes (defparameter t1 (make-rb 'tree e1)))
+  (is (eql 50 (rb-tree-elem-value t1)))
+  (finishes (describe t1))
+  (finishes (defparameter e2 (make-rb-elem :value 10)))
+  (finishes (defparameter e3 (make-rb-elem :value 80)))
+  (finishes (defparameter t2 (rb-insert e3 (rb-insert e2 t1))))
+  (is (eql 50 (rb-tree-elem-value t2)))
+  (finishes (describe (rb-tree-elem-value t2))))
 
 ;;; lolh-utils-tests-main.lisp end of file
 ;;; __________________________________________________________________

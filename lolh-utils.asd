@@ -1,13 +1,15 @@
 ;;; lolh-utils.asd
-;;; Time-stamp: <2023-02-13 06:31:14 wlh>
+;;; Time-stamp: <2023-03-25 14:38:52 minilolh>
 
 ;;; Author: LOLH-LINC <lincolnlaw@mac.com>
 ;;; Created: 2023-01-12
-;;; Version: 0.1.9
+;;; Version: 0.1.10
 
 ;;; Commentary
 ;;  The system 'lolh-utils' handles binary search trees (cl-bst)
 ;;  and red-black trees (cl-rbt).
+;;  It also handles the cl-filesz data structure, which holds pathnames
+;;  and compares them for size and equality.
 
 ;;  To test the system, run the ASDF command
 ;;  (asdf:test-sytem "lolh-utils")
@@ -19,14 +21,16 @@
   :version "0.1.9"
   :author "LOLH <lincolnlaw@mac.com"
   :license "CCO 1.0 Universal"
-  :depends-on ()
+  :depends-on ("trivial-file-size")
   :components ((:file "lolh-utils-package")
 	       (:module "cl-bst" :depends-on ("lolh-utils-package")
 		:components ((:file "cl-bst")))
 	       (:module "cl-rbt" :depends-on ("lolh-utils-package")
 		:components ((:file "cl-rbt")
 			     (:file "cl-rbt-definitions"
-			      :depends-on ("cl-rbt")))))
+			      :depends-on ("cl-rbt"))))
+               (:module "cl-filesz" :depends-on ("lolh-utils-package")
+                :components ((:file "cl-filesz"))))
   :in-order-to ((test-op (test-op "lolh-utils/tests"))))
 
 (defsystem "lolh-utils/tests"

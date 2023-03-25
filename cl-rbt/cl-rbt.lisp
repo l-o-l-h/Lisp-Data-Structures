@@ -1,5 +1,5 @@
 ;;; cl-rbt.lisp -- RED-BLACK TREES
-;;; Time-stamp: <2023-02-22 00:35:39 lolh-mbp-16>
+;;; Time-stamp: <2023-03-25 12:16:50 minilolh>
 
 ;;; Author: LOLH-LINC <lincolnlaw@mac.com>
 ;;; Created: 2023-02-09
@@ -45,8 +45,8 @@ to enforce this constraint."
   
   (value :black)) ; :red | :black
 
-(defconstant +rb-red+ (make-rb-color :value :red))
-(defconstant +rb-black+ (make-rb-color :value :black))
+(defparameter +rb-red+ (make-rb-color :value :red))
+(defparameter +rb-black+ (make-rb-color :value :black))
 
 (defun rb-black-p (rb-col)
   (eq +rb-black+ rb-col))
@@ -72,7 +72,7 @@ constraints."
 ;; 		:elem :empty
 ;; 		:right (make-rb-tree :elem :empty)))
 
-(defconstant +rb-empty-tree+
+(defparameter +rb-empty-tree+
   (make-rb-tree :elem :empty))
 
 (defun rb-empty-tree-p (rbt)

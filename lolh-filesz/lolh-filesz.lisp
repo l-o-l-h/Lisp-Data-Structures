@@ -1,5 +1,5 @@
 ;;; lolh-filesz.lisp --- Filesz Data Structure for files and sizes
-;;; Time-stamp: <2023-03-25 18:58:28 minilolh>
+;;; Time-stamp: <2023-03-26 03:17:04 wlh>
 
 ;;; Author: LOLH-LINC
 ;;; Created: 2023-03-25
@@ -47,15 +47,12 @@ Requires a PATH argument."
 (defun filesz-dedup (path-ls)
   "This procedure destructively removes duplicates from the path list
 using the built-in procedure `delete-duplicates'."
-  (delete-duplicates path-ls :from-end t :test #'filesz-equal))
+  (delete-duplicates path-ls :test #'filesz-equal))
 
 (defun filesz-sort (path-ls)
-  "The built-in (destructive) `sort' function is used to the paths list,
-but the list is first de-duped using the built-in procedure
-`delete-duplicates' (since `sort' is destructive).
-It will be faster to implement a quicksort procedure that 
-eliminates duplicates during the sort.  But maybe this is fast enough."
-  (sort (filesz-dedup path-ls) #'filesz-less-than))
+  "The built-in (destructive) `sort' function is used to sort the paths
+list by file size."
+  (sort path-ls #'filesz-less-than))
 
 (defun filesz-cmp (fsz1 fsz2)
   "This procedure compares two FILESZ objects and returns
@@ -94,8 +91,8 @@ These numbers work well with the `filesz-cmp' procedure.
                                      ,(uiop:unix-namestring (filesz-path filesz2)))
                                    :ignore-error-status t)))))
 
-(defun filesz-dedup-and-sort (path-ls)
-  "The main procedure to dedup and sort a list of pathnames."
-  (mapcar #'filesz-path (filesz-sort (filesz-load path-ls))))
+(defun filesz-load-and-dedup (path-ls)
+  "The main procedure to load and dedup a list of pathnames."
+  (mapcar #'filesz-path (filesz-dedup (filesz-load path-ls))))
 
 ;;; lolh-filesz.lisp ends here

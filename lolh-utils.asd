@@ -1,5 +1,5 @@
 ;;; lolh-utils.asd
-;;; Time-stamp: <2023-03-25 14:38:52 minilolh>
+;;; Time-stamp: <2023-03-25 18:57:45 minilolh>
 
 ;;; Author: LOLH-LINC <lincolnlaw@mac.com>
 ;;; Created: 2023-01-12
@@ -18,7 +18,7 @@
 
 (defsystem "lolh-utils"
   :description "My version of a binary search tree."
-  :version "0.1.9"
+  :version "0.1.10"
   :author "LOLH <lincolnlaw@mac.com"
   :license "CCO 1.0 Universal"
   :depends-on ("trivial-file-size")
@@ -29,8 +29,8 @@
 		:components ((:file "cl-rbt")
 			     (:file "cl-rbt-definitions"
 			      :depends-on ("cl-rbt"))))
-               (:module "cl-filesz" :depends-on ("lolh-utils-package")
-                :components ((:file "cl-filesz"))))
+               (:module "lolh-filesz" :depends-on ("lolh-utils-package")
+                :components ((:file "lolh-filesz"))))
   :in-order-to ((test-op (test-op "lolh-utils/tests"))))
 
 (defsystem "lolh-utils/tests"

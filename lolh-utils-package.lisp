@@ -1,5 +1,5 @@
 ;;; lolh-utils-packages.lisp - Packages used by lolh-utils
-;;; Time-stamp: <2023-03-25 14:34:28 minilolh>
+;;; Time-stamp: <2023-03-25 18:59:15 minilolh>
 
 ;;; Author: LOLH <lincolnlaw@mac.com>
 ;;; Created: 2023-01-16
@@ -58,12 +58,8 @@
 	   :+rb-empty-tree+
            :rb-black-p
 	   :rb-red-p
-;; CL-FILESZ           
-           :cl-filesz
-           :cl-filesz-new
-           :cl-filesz-load
-           :cl-filesz-cmp
-           :cl-filesz-eq
+;; LOLH-FILESZ           
+           :filesz-dedup-and-sort
            ))
 
 
